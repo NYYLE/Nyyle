@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "842527160662",
+    "firebase_url": "https://nyyle-n1234.firebaseio.com",
+    "project_id": "nyyle-n1234",
+    "storage_bucket": "nyyle-n1234.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842527160662:android:c32980fa9cc9532c",
+        "android_client_info": {
+          "package_name": "com.nyyle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "842527160662-3hmqe008g6hhth4tg144mqmjfhge4qq2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nyyle",
+            "certificate_hash": "1b6ab536f8dd6d201c766b8d904fe9e39bddb3cf"
+          }
+        },
+        {
+          "client_id": "842527160662-615179e6gq6trqgm7uigdqh5rc9a81k7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDN-GGgTmv0NhzBqTTohYXc-ClDrzQ5EMs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "842527160662-615179e6gq6trqgm7uigdqh5rc9a81k7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
