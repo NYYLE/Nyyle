@@ -51,6 +51,7 @@
         android:onClick="createAccount"
         android:text="Register"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordText" />

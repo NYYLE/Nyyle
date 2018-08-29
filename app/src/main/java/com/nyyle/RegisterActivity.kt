@@ -1,13 +1,10 @@
 package com.nyyle
 
-import android.app.ProgressDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -50,18 +47,21 @@ class RegisterActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success")
-                            val userId = mAuth!!.currentUser!!.uid
+
+                            val userId = mAuth!!.currentUser!!.uid // test
 
                             //Verify Email
-                            verifyEmail();
+                            verifyEmail()
 
                             //update user profile information
                             val currentUserDb = mDatabaseReference!!.child(userId)
+                            currentUserDb.child("name").setValue("test")
+
                             updateUserInfoAndUI()
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                            Toast.makeText(this@RegisterActivity, "Authentication failed.",
+                            Toast.makeText(this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show()
                         }
                     }
@@ -71,7 +71,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun updateUserInfoAndUI() {
-        //start next activity
+        // Start next activity
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
@@ -83,7 +83,7 @@ class RegisterActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this,
-                                "Verification email sent to " + mUser.getEmail(),
+                                "Verification email sent to " + mUser.email,
                                 Toast.LENGTH_SHORT).show()
                     } else {
                         Log.e(TAG, "sendEmailVerification", task.exception)

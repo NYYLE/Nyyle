@@ -53,7 +53,7 @@ class LoginActivity : AppCompatActivity() {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.e(TAG, "signInWithEmail:failure", task.exception)
-                            Toast.makeText(this@LoginActivity, "Authentication failed.",
+                            Toast.makeText(this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show()
                         }
                     }
@@ -63,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun updateUI() {
-        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
     }

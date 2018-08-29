@@ -51,6 +51,7 @@
         android:onClick="login"
         android:text="Login"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordText" />
@@ -68,6 +69,7 @@
         android:onClick="createAccount"
         android:text="Create Account"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -83,9 +85,8 @@
         android:layout_marginTop="16dp"
         android:clickable="true"
         android:onClick="forgotPassword"
-        android:text="TextView"
+        android:text="Forgot Password?"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton"
-        tools:text="Forgot Password?" />
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 </android.support.constraint.ConstraintLayout>
