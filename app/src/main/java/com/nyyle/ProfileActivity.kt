@@ -1,5 +1,6 @@
 package com.nyyle
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -37,6 +38,7 @@ class ProfileActivity : AppCompatActivity() {
         mUserReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 nameText.text = Editable.Factory.getInstance().newEditable(snapshot.child("name").value as String)
+                dobDatePicker.text = Editable.Factory.getInstance().newEditable(snapshot.child("birthday").value as String)
             }
             override fun onCancelled(databaseError: DatabaseError) {}
         })
@@ -57,6 +59,8 @@ class ProfileActivity : AppCompatActivity() {
 
             val currentUserDb = mDatabaseReference!!.child(userId)
             currentUserDb.child("name").setValue(nameText.text.toString())
+            currentUserDb.child("birthday").setValue(dobDatePicker.text.toString())
+            currentUserDb.child("bio").setValue(bioText.text.toString())
 
             Toast.makeText(this, "Changes applied.",
                     Toast.LENGTH_SHORT).show()
@@ -64,5 +68,11 @@ class ProfileActivity : AppCompatActivity() {
             Toast.makeText(this, "Please fill in all the fields.",
                     Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun logout(view: View) {
+        mAuth!!.signOut()
+
+        startActivity(Intent(this, LoginActivity::class.java))
     }
 }

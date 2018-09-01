@@ -7,14 +7,14 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
 
     // Firebase references
-    private var mDatabaseReference: DatabaseReference? = null
+    private var mUserDatabaseReference: DatabaseReference? = null
+    private var mParamDatabaseReference: DatabaseReference? = null
     private var mDatabase: FirebaseDatabase? = null
     private var mAuth: FirebaseAuth? = null
 
@@ -22,6 +22,7 @@ class RegisterActivity : AppCompatActivity() {
     private val TAG = "RegisterActivity"
     private var email: String? = null
     private var password: String? = null
+    private var currentUserCount: Int? = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +33,16 @@ class RegisterActivity : AppCompatActivity() {
 
     fun initialise() {
         mDatabase = FirebaseDatabase.getInstance()
-        mDatabaseReference = mDatabase!!.reference!!.child("Users")
+        mParamDatabaseReference = mDatabase!!.reference!!.child("Parameters")
+        mUserDatabaseReference = mDatabase!!.reference!!.child("Users")
         mAuth = FirebaseAuth.getInstance()
+
+        mParamDatabaseReference!!.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                currentUserCount = snapshot.child("currentUserCount").value.toString().toInt()
+            }
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
     }
 
     fun createAccount(view: View) {
@@ -48,14 +57,18 @@ class RegisterActivity : AppCompatActivity() {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success")
 
-                            val userId = mAuth!!.currentUser!!.uid // test
+                            val userId = mAuth!!.currentUser!!.uid
 
-                            //Verify Email
+                            // Verify Email
                             verifyEmail()
 
-                            //update user profile information
-                            val currentUserDb = mDatabaseReference!!.child(userId)
+                            // Update System Parameters
+                            mParamDatabaseReference!!.child("currentUserCount").setValue(currentUserCount!!.plus(1))
+
+                            // Update user profile information
+                            val currentUserDb = mUserDatabaseReference!!.child(currentUserCount!!.minus(1).toString())
                             currentUserDb.child("name").setValue("test")
+                            currentUserDb.child("userId").setValue(userId)
 
                             updateUserInfoAndUI()
                         } else {
