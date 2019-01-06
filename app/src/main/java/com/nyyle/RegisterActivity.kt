@@ -69,6 +69,10 @@ class RegisterActivity : AppCompatActivity() {
                             val currentUserDb = mUserDatabaseReference!!.child(currentUserCount!!.minus(1).toString())
                             currentUserDb.child("name").setValue("test")
                             currentUserDb.child("userId").setValue(userId)
+                            currentUserDb.child("birthday").setValue("dob")
+                            currentUserDb.child("bio").setValue("test bio")
+                            currentUserDb.child("rating").setValue("5")
+                            currentUserDb.child("score").setValue("5")
 
                             updateUserInfoAndUI()
                         } else {

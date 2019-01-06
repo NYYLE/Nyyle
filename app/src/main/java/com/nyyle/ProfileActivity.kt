@@ -29,8 +29,8 @@ class ProfileActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val mUser = mAuth!!.currentUser
-        val mUserReference = mDatabaseReference!!.child(mUser!!.uid)
+        //val mUser = mAuth!!.currentUser
+        val mUserReference = mDatabaseReference!!.child("0")
 
         //emailText!!.text = mUser.email   <<< readonly
         //email verified lark   !!.text = mUser.isEmailVerified.toString()
@@ -57,7 +57,7 @@ class ProfileActivity : AppCompatActivity() {
             mDatabase = FirebaseDatabase.getInstance()
             mDatabaseReference = mDatabase!!.reference!!.child("Users")
 
-            val currentUserDb = mDatabaseReference!!.child(userId)
+            val currentUserDb = mDatabaseReference!!.child("0")
             currentUserDb.child("name").setValue(nameText.text.toString())
             currentUserDb.child("birthday").setValue(dobDatePicker.text.toString())
             currentUserDb.child("bio").setValue(bioText.text.toString())

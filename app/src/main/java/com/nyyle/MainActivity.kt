@@ -7,7 +7,6 @@ import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,13 +36,11 @@ class MainActivity : AppCompatActivity() {
         mParamDatabaseReference!!.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 currentUserCount = snapshot.child("currentUserCount").value.toString().toInt()
+
+                getProfile()
             }
             override fun onCancelled(databaseError: DatabaseError) {}
         })
-
-        getProfile()
-
-        nameText.text = currentProfileName
     }
 
     fun profileTapped(view: View) {
@@ -51,15 +48,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getProfile() {
-        val userChosen = 0
 
-        mUserDatabaseReference!!.child(userChosen.toString()).addValueEventListener(object : ValueEventListener {
+        print(currentUserCount!!)
+        val usersChosen = (0..currentUserCount!!.minus(1)).shuffled().last()
+
+        mUserDatabaseReference!!.child(usersChosen.toString()).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 currentProfileName = snapshot.child("name").value.toString()
+
+                nameText.text = currentProfileName
             }
             override fun onCancelled(databaseError: DatabaseError) {
                 return
             }
         })
     }
+
+
 }
